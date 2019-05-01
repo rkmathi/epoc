@@ -7,7 +7,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${out_dir})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${out_dir})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${out_dir})
 
-project(work)
+project(epoc)
 
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
@@ -15,4 +15,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CXX_EXTENSIONS OFF)
 ADD_COMPILE_OPTIONS(-Werror -Wall -Wextra)
 
-add_executable(work main.cc)
+add_executable(epoc main.cc)
