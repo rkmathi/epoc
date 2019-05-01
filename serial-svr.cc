@@ -31,7 +31,6 @@ int main() {
     socklen_t len = sizeof(client);
     int sock = accept(sock0, reinterpret_cast<struct sockaddr*>(&client), &len);
 
-    printf("@@@ %d\n", len);
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     write(sock, kResponseBody, kResopnseSize);
 

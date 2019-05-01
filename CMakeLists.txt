@@ -15,4 +15,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CXX_EXTENSIONS OFF)
 ADD_COMPILE_OPTIONS(-Werror -Wall -Wextra)
 
-add_executable(epoc main.cc)
+add_executable(serial-svr serial-svr.cc)
