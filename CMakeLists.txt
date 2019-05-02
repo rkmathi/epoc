@@ -17,3 +17,4 @@ ADD_COMPILE_OPTIONS(-Werror -Wall -Wextra)
 
 add_executable(serial-svr serial-svr.cc)
 add_executable(fork-svr fork-svr.cc)
+add_executable(epoll-svr epoll-svr.cc)
