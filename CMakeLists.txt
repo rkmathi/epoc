@@ -16,3 +16,4 @@ set(CXX_EXTENSIONS OFF)
 ADD_COMPILE_OPTIONS(-Werror -Wall -Wextra)
 
 add_executable(serial-svr serial-svr.cc)
+add_executable(fork-svr fork-svr.cc)
