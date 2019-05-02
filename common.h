@@ -1,3 +1,4 @@
+#include <arpa/inet.h>
 #include <chrono>
 #include <cstdint>
 #include <cstdio>
@@ -31,8 +32,10 @@ void PrintCpus() {
   LOG << "### CPUs: " << std::thread::hardware_concurrency() << std::endl;
 }
 
-int CreateSocket() {
-  int sock = socket(AF_INET, SOCK_STREAM, 0);
+int CreateSocket(bool is_stream) {
+  int sock = is_stream ?
+             socket(AF_INET, SOCK_STREAM, 0) :
+             socket(AF_INET, SOCK_DGRAM, 0);
   int flag = 1;
   setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&flag),
              sizeof(flag));
@@ -42,8 +45,8 @@ int CreateSocket() {
 
 void BindSocket(int sock, struct sockaddr_in* addr) {
   addr->sin_family = AF_INET;
+  addr->sin_addr.s_addr = htonl(INADDR_ANY);
   addr->sin_port = htons(kPort);
-  addr->sin_addr.s_addr = INADDR_ANY;
   bind(sock, reinterpret_cast<struct sockaddr*>(addr), sizeof(*addr));
   LOG << "=== " << &sock << " socket0 bound" << std::endl;
 }
@@ -63,9 +66,9 @@ void DoHeavyTask() {
   std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
 
-void WriteSock(int sock) {
+void WriteSockBlocking(int sock) {
   write(sock, kResponseBody, kResopnseSize);
-  LOG << "--- " << &sock << " wrote" << std::endl;
+  LOG << "--- " << &sock << " wrote blocking" << std::endl;
 }
 
 void CloseSock(int sock) {

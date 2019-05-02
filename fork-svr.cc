@@ -10,7 +10,7 @@ int main() {
   LOG << "### START fork-svr" << std::endl;
   PrintCpus();
 
-  int sock0 = CreateSocket();
+  int sock0 = CreateSocket(true);
 
   struct sockaddr_in addr{};
   BindSocket(sock0, &addr);
@@ -29,7 +29,7 @@ int main() {
       LOG << "--- pid: " << mypid << " START child" << std::endl;
 
       DoHeavyTask();
-      WriteSock(sock);
+      WriteSockBlocking(sock);
       return 0;
     } else {
       // Parent process

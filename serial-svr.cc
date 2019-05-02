@@ -9,7 +9,7 @@ int main() {
   LOG << "### START serial-svr" << std::endl;
   PrintCpus();
 
-  int sock0 = CreateSocket();
+  int sock0 = CreateSocket(true);
 
   struct sockaddr_in addr{};
   BindSocket(sock0, &addr);
@@ -22,7 +22,7 @@ int main() {
     int sock = AcceptSocket(sock0, &client, &len);
 
     DoHeavyTask();
-    WriteSock(sock);
+    WriteSockBlocking(sock);
 
     CloseSock(sock);
   }
