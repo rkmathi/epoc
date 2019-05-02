@@ -30,8 +30,6 @@ int main() {
 
       DoHeavyTask();
       WriteSock(sock);
-
-//      CloseSock(sock);
       return 0;
     } else {
       // Parent process
@@ -42,6 +40,8 @@ int main() {
       while ((cpid = waitpid(-1, &status, WNOHANG)) > 0) {}
       LOG << "=== pid: " << mypid << ", status: " << status <<
           ", errno: " << errno << ", cpid: " << cpid << std::endl;
+
+      CloseSock(sock);
     }
   }
 
